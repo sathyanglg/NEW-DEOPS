@@ -1,0 +1,682 @@
+SVN, RTC etc
+
+Git --> GitLab, GitHub, BitBucket, Gerrit
+
+3.1. Secure the code, i.e., restictions on the code (Read, Write).
+3.2. Operations on code (check-out, check-in). -- clone, pull, push etc.
+3.3. Manage the code (branching, merging, taging).
+DVCS - CVCS
+
+Dev1 - Local project ready
+
+Dev1 will request to DevOps team to create a project/repo in GitHub.
+
+DevOps - Create a repo with the same project name "HelloWorld" which is provided by Dev team.
+
+Provide the repo URL to the requester/dev team.
+
+https://github.com/venkatasykam/HelloWorld.git
+
+Dev1 - need to push the code to the repo.
+==============================
+1. What is Version Control.
+  2. GitHub intro.
+  3. Three main points.
+    3.1. Protecting the code, i.e., restictions on the code (Read, Write).
+    3.2. Operations on code (check-out, check-in). -- clone, pull, push etc.
+    3.3. Manage the code (branching, merging, taging).
+  4. Upload the local project to GitHub server.
+  -------------------------
+  Day1: Practice
+Go to https://github.com/.
+
+Signup/Signin.
+
+Practice: Add a new project to GitHub repo. i.e., add you local project to github server.
+  1. Crate a new repository in GitHub. 
+  
+    Note:
+      1. Download the git scm from https://git-scm.com/ which is the client to communicate with the serevr GitHub.com.
+      2. Download the tortoiseGit from https://tortoisegit.org/ (this is also a client, just try this. Restart your machine if you don't see the colors on the local repo folders/files.)       
+
+  2. Clone the GitHub repo to your local machine. (using any client Git bash, TortoiseGit, etc)
+
+    Syntax: git clone <gitURL> <destinationPath>
+
+    Ex: git clone https://github.com/venkatasykam/FirstJavaProject.git <destinationPath>
+
+  3. Configure username & emailid.
+  
+      git config --global user.email "you@example.com"
+      git config --global user.name "Your Name"
+
+  4. Add the new files/code to repo.
+
+    Syantax: git add <fileName>  OR git add .
+
+    Ex: git add MyFirstJava.java
+
+  5. Commit to local repo.
+
+    Syntax: git commit -m "commit message"
+
+    Ex: git commit -m "adding my first project"
+
+  6. Push the commits to server.
+
+    Syntax: git push
+
+    ex: git push
+Note:
+To remove locally saved credentials: git config credential.helper ""
+To edit the config details: git config --global --edit
+Bitbucket
+  Practice the same above steps with Bitbucket https://bitbucket.org/ (This is the similar tool to GitHub).
+  
+  Parallelly you can learn both the tools since operations(git commands & worlflow, branching, merging, tagging etc) wise both are same.
+Covered topics
+  1. What are the unstaged & staged areas.
+  2. How to create a repo in GitHub.
+  3. Added a local project(code/files) to GitHub repo.
+  4. We have Modified the files and committed and then pushed to repo.
+  5. Modified two files & added only one file to stated area and then committed to local repo, finbally pushed to remo
+  =======================================================================================
+  Day2: Practice
+Go to https://github.com/.
+
+Signup/Signin.
+
+Practice-1: Add a new project to GitHub repo under the ORGANIZATION. i.e., add you local project to github ORGANIZATION.
+Practice-2: Do some changes in server level, and update your local workspace (git pull).
+  1. Create an ORGANIZATION.
+  
+  2. Create a new repository under the organization. (not under your github username).
+  
+    Note:
+      1. Download the git scm from https://git-scm.com/ which is the client to communicate with the serevr GitHub.com.
+      2. Download the tortoiseGit from https://tortoisegit.org/ (this is also a client, just try this. Restart your machine if you don't see the colors on the local repo folders/files.)       
+
+  3. Clone the GitHub repo to your local machine. (using any client Git bash, TortoiseGit, etc)
+
+    Syntax: git clone <gitURL> <destinationPath>
+
+    Ex: git clone https://github.com/<ORGNAME>/FirstJavaProject.git <destinationPath>
+
+  4. Configure username & emailid.
+  
+      git config --global user.email "you@example.com"
+      git config --global user.name "Your Name"
+
+  5. Add the new files/code to repo.
+
+    Syantax: git add <fileName>  OR git add .
+
+    Ex: git add MyFirstJava.java
+
+  6. Commit to local repo.
+
+    Syntax: git commit -m "commit message"
+
+    Ex: git commit -m "adding my first project"
+
+  7. Push the commits to server.
+
+    Syntax: git push
+
+    ex: git push
+    
+  8. Do some changes from Server level (Github.com), update your workspace with latest changes.
+  
+    Synatx: git pull Or git pull origin <branchName>
+    
+    Ex: git pull origina master
+  
+  9. Create a new branch in local and then push your new branch to server. 
+  
+    Syantax: git checkout -b <newBranchName>.
+    
+  10. Update two files. Commit each file individually, and see the log locally how the commits created (date & date, commit-id, HEAD, origin branch etc). "git log".
+  
+  11. From the above step-10, push only one commit.
+  
+    Syntax: git push origin <commit-id>:<branchName>
+Bitbucket
+  Practice the same above steps with Bitbucket https://bitbucket.org/ (This is the similar tool to GitHub).
+  
+  Parallelly you can learn both the tools since operations(git commands & worlflow, branching, merging, tagging etc) wise both are same.
+What you learned
+  1. How to update your local workspace if someone pushed their code chnages into GitHub server.
+  2. How to create a repo in GitHub under the ORGANIZATION & the purpose of the ORGANIZATION.
+  3. Organization name is unique for entire github server.
+  4. Difference between the code maintain under your username & organization.
+  5. How to delete a repo.
+  6. How to create a new branch from command line.
+  7. Inviting users i.e., adding users to your organization.
+  8. Pushing selective commit.
+  =============================================
+  Day3: Practice
+Go to https://github.com/.
+
+Signup/Signin.
+
+Practice-1: Invite the github users to your organization & give the read/write/admin permission on your projects. Create the teams and add the users to the teams.
+Practice-2: Protect the branches.
+Practice-3: Update file1 changes in one branch called "MobileApp", and merge the file1 changes to 'master' branch.
+Practice-4: Update file2 changes in one branch called "MobileApp", and merge the file2 changes to 'master' branch. Before the merge create a pull request to review your changes.
+=========================================================================
+Daily Practice with Git
+Step-1. Update the workspace before you start working on your local git repo/branch.
+
+1.1. Synch the local git branch with remote git branch.
+    1.1.1. Go to Git perspective --> Right click on the project --> Pull. (Eclipse or STS)
+    1.1.2. Right click on the project Team --> Pull (Eclipse or STS).
+    1.1.2. git pull origin <branchName> or git pull (command).
+Step-2. Do your changes on your local workspace.
+
+Step-3. git pull again before you commit your changes to local repo.
+
+Step-4. Check if there is any confilict resolve it. Or commit & push your changes.
+-------------------------------------------------------------
+Practice-2
+1. By default your repository has one branch named "master" which is considered to be the definitive/conclusive/final/ultimate branch. But dont assume like 'master' branch is special. Its like other branches. We can remove/rename this branch.
+Practice-1.1:-
+    -->Checkout the code to your machine:
+      1.1.1. Clone the specific branch you want.
+        Command: git clone -b <brach_name> --single-branch <git_repo> <destination>
+        Ex: git clone -b Mx_Dev --single-branch https://github.com/venkatasykam/JarProjects.git /d/hari/git/dummy/JarProjects_mx
+
+    -->Update code & check-in to git "local" repo:-
+      1.1.2 Update the code on local, commit to local repo and then push to your git repo.
+      1.1.3. Modify a file and ADD a new file and run the comamnd "git status -s".
+        -->Added a new line in the file.
+        -->Updated the exisitng line.
+        -->Removed few number of lines.
+      1.1.4. See the diff b/w remote repo and local repo "git diff".
+      1.1.5. Command: git commit -m "updated few files".-->committed to local repo.
+
+    -->Push the local repo to GIT repo.
+      1.1.6. Command: git push.
+Practice-1.2:- Switch to other branch: git checkout
+      Clone the branch(Dev_Branch) other than 'master' (i.e., default branch) and modify the files and then commit to the repository branch 'Dev_Branch'.
+
+      1.2.1. Clone: http://stackoverflow.com/questions/17383217/clone-from-a-branch-other-than-master
+
+        git clone --help
+
+        Option-1:- Cloning "master" (default branch) and then switch to other branch.
+        ----------
+          Command: git clone <url> <destination>
+
+          Ex: git clone https://github.com/venkatasykam/hello-world.git Dev_Branch
+
+          Command: git branch -l
+          Command: git checkout <branchname> or git checkout -b <branchname> 
+          [
+          This is shorthand for: 
+          git branch <branchname>
+          git checkout <branchname>
+          ]
+
+          Ex: git checkout -b Dev_Branch
+
+          Command: git branch -l
+
+        Option-2:- Clone the particular branch
+        ----------
+          Command: git clone -b <branch> <remote_repo>
+
+            Ex: git clone -b Us_Dev https://github.com/venkatasykam/hello-world.git hello_world_us
+
+      1.2.2. Updated something and commit to the branch.
+
+          Command: git commit -m "updated AddNumbers.java file with subtraction method"
+
+      1.2.3. Command: git push
+
+    Practice-1.3:- Delete a branh:
+
+        Command: git branch -d <branchname> or git branch -D <branchname> (force delete to unmerged branch).
+2. DIFF: (Create patch file and apply patch file):
+      git log --oneline --all
+      2.1. Diff b/w two revision numbers: git diff from-commit to-commit > output-file
+          from-commit – the point at which we want the patch to start. 
+          to-commit – the patch will span the changes up to and including this point.
+          output-file – the patch will be written here
+
+      2.2. Assume I had checkout the code and now my repo origin is 'Dev_Branch'. Then, modified few files. Checking the diff b/w local and remote repo.
+          git diff>patch.diff
+
+          git apply patch.diff
+
+      git diff $(git merge-base <public branch> <experimental branch>) > <output file>
+
+        Example: git diff $(git merge-base master Dev_Branch) > anotherPatch.diff
+
+      git am 0001-updated-readme-file.patch --ignore-whitespace --no-scissors --ignore-space-change [not working]
+3. GIT merging two branches: https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging
+4. Rename the existing branch:
+      4.1. switch to branch which needs to be renamed: git checkout -b <old_name>
+      4.2. git branch -m <new_name>
+      4.3. git push origin :<old_name>
+      4.4. git push origin <new_name>:refs/heads/<new_name>
+
+      OR
+
+      4.1. git branch -m Dev_Branch Mx_Dev
+      4.2. git push origin :Dev_Branch
+      4.3. git push origin Mx_Dev
+
+      -->git branch -a -->Display all the branches which are there under the repo.
+
+      -->We can change the default branch from "master" to anyother. Click on the project(repo)-->settings-->branches-->here we can project the branches, and update default branch.
+
+      -->Rename/delete/transferOwnership/chnage the mode public or prtivate
+          repo: repo-->settings-->options
+
+      -->Adding user: repo-->settings-->collaborators
+
+      -->Check WebHooks on repo-->settings-->WebHooks in office
+
+      http://githooks.com/
+5. Transfer the repo to another organization or owner: https://help.github.com/articles/transferring-a-repository-owned-by-your-organization/
+      5.1. Go to project repo "JarProjects" under the organization "MainLinee-FP9".  https://github.com/MainLine-FP9/JarProjects
+      5.2. Settings-->Danzer Zone-->Click on "Transfer" button at "Transfer ownership".
+      5.3. In the window-->enter the repo name "JarProjects" and target "organization" name "Maintenance-FP9".
+6. Creating a new repo(in same organization or other organization) from exisitng repo with particular branch.
+     http://stackoverflow.com/questions/9527999/how-do-i-create-a-new-github-repo-from-a-branch-in-an-existing-repo
+
+      6.1. Create a new_repo. 
+          Ex: https://github.com/MainLine-FP9/new_repo.git [in anotehr org]
+          Ex: git push https://github.com/venkatasykam/new_repo.git +Us_Dev:master [under the same user]
+      6.2. Clone the existing repo to new folder or update("git pull") the cloned existing repo.
+          Ex: Existing repo https://github.com/venkatasykam/hello-world.git 
+          This repo has 3 branches Us_Dev, Mx_Dev, master, Now I want a new repo with the code base "Us_Dev".
+      6.3. git push https://github.com/MainLine-FP9/new_repo.git +Us_Dev:master
+         git push tps://github.com/venkatasykam/new_repo.git +Us_Dev:master
+7. Branch to branch merge: https://help.github.com/articles/merging-a-pull-request/
+      7.1. https://github.com/venkatasykam/JarProjects has 3 branches. Us_Branch and Mx_Branch and master.
+      7.2. Updated a java file on "Us_Branch" and commited the changes. 
+      7.3. Master needs to be updated with "Us_Branch". Now, create Pull Request.
+      7.4. Here, "master" should be "base" and "compare" should be "Us_Branch". Otehrwise, GITHUB will not allow merge.
+      7.5. Now, "Us_Branch" & "Mx_Branch" have changes individually. Added a comment in the same line and both have different content.
+        7.5.1. If Auto-merge is NOT possible in this case, we have to update the file(s) Manually and resolve the conflicts.
+        Ex: base:Mx-branch , compare:Us_Branch
+        The manually resolved conflicts(i.e., the changes) will be saved to both the branches to not to repeat this same conflict again in future.
+
+        7.5.2. If Auto-merge is possible, only the "base" branch will be merged with the changes from "compare". The changes in "compare:Us_Branch" will be remain same.
+8. Merge from one organization/repo to anotherOrganization/repo.
+      8.1. There should be a fork betweeen the two organizations. Ex: Created a fork b/w https://github.com/venkatasykam/JarProjects, and https://github.com/MainLine-FP9/, then the "JarProjects" has been created newly on https://github.com/MainLine-FP9/JarProjects. If the repo "JarProjects" is lareayd there in "MainLine-FP9", then GIT will create a new repo as "JarProjects-1". [Once if you create a "fork" b/w organization, we cant un-fork even if you re-name the repo.]
+      8.2. Made some changes in one java file "AddNumbers.java" from "venkatasykam/JarProjects". Now, Open a pull request.
+      8.3. Pull the changes from "venkatasykam/JarProjects" into "MainLine-FP9/JarProjects".
+      8.4. Now, making some chnages in one java file "AddNumbers.java" from "MainLine-FP9/JarProjects". Now, Open a pull request.
+      8.5. Pull the changes from "MainLine-FP9/JarProjects" into "venkatasykam/JarProjects".
+      8.6. Making changes in both the repos. Added a comment in the same line and both have different content.
+      8.7. Auto-merge is not possible in this case. Manually we have to update the file(s) and resolve the conflict(s).
+9. Merge from one git repo to another repo.
+      Basic example: merge repo B into repo A
+      git clone A
+      git clone B
+      cd A
+      git remote add B ../B
+      git fetch B
+      git branch B-master B/master [whichever branch you want to merge]
+      git merge B-master
+    ----------------------OR
+      cd path/to/project-b
+      git remote add project-a path/to/project-a
+      git fetch project-a
+      git merge --allow-unrelated-histories project-a/master # or whichever branch you want to merge
+      git remote remove project-a
+10. Git: ignore some files during a merge [not working]
+      Let's say you want to exclude the file config.php
+
+
+      -->On branch A:
+
+        1. Create a file named '.gitattributes' in the same dir, with this line: config.php merge=ours. This tells git what strategy to use when mergin the file. In this case it always keep your version, ie. the version on the branch you are merging into.
+        2. Add the .gitattributes file and commit.
+
+      -->On branch B: repeat steps 1-2
+
+      Try merging now. Your file should be left untouched.
+
+      git merge --no-commit <merge-branch>
+      git reset HEAD myfile.txt
+      git checkout -- myfile.txt
+      git commit -m "merged <merge-branch>"
+
+    http://stackoverflow.com/questions/8781240/a-way-to-restrict-git-branch-access
+    https://help.github.com/articles/defining-the-mergeability-of-pull-requests/
+11. git log --diff-filter=D --summary | grep delete
+    http://stackoverflow.com/questions/31250359/git-repository-how-to-recover-deleted-files
+12. Create new repository from particular branch of another repository.
+    http://stackoverflow.com/questions/9527999/how-do-i-create-a-new-github-repo-from-a-branch-in-an-existing-repo
+13. Merge from one branch to another branch: https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging
+    https://git-scm.com/book/en/v2/Git-Tools-Rerere
+    After you resolved the conflict manually run the command "git add <fine_name>". Or use the TortoiseGit to resolve the conflicts.
+
+    git branch -->list all the branches
+    git branch -v -->To see the last commit on each branch
+    git branch --merged and --no-merged -->options can filter this list to branches that you have or have not yet merged into the branch you’re currently on.
+    git branch -d <branch_name> -->Delete the branch. Delete will be failed, If the branch <branch_name> is not yet merged to another branch.
+    git branch -D testing -->Delete the branch by force.
+14. Restore deleted branch. http://stackoverflow.com/questions/4674226/does-github-keep-deleted-remote-branches-in-history-if-so-can-those-be-restore
+    -->git reflog show --all
+    -->Choose the commit ID from the result.
+15. How to create an empty branch http://www.bitflop.dk/tutorials/how-to-create-a-new-and-empty-branch-in-git.html
+    git checkout --orphan NEWBRANCH
+    git rm -rf .
+
+    20 jars projects are there in 'master' branch. [as per my requirement, 15 jars should be in Us_Dev, and 16 in Hk_Dev branch].
+
+    -->cloned the 'master' to local machine.
+    -->git checkout --orphan Us_Dev.
+    -->git rm -rf .
+    -->git add . -->Copied and added 15 jas to Us_Dev branch.
+    -->git commit -m "adding local projects to github Us_Dev branch repo".
+    -->git push --set-upstream origin Us_Dev.
+
+    done some chanegs in jar16 project, now I wanted to merge the changes to master.
+
+    -->git checkout master
+    -->git merge --no-commit Us_Dev or git merge --no-commit --allow-unrelated-histories Us_Dev.
+    -->git reset HEAD pom.xml [root pom]
+    -->git reset HEAD */pom.xml [all other poms]
+    -->git reset HEAD artifacts.txt [other files if any]
+    -->git checkout -- artifacts.txt
+    -->git checkout -- */pom.xml
+    -->git checkout -- pom.xml
+    -->git commit -m "merged the chnages from jar16 project from us_dev to master".
+
+    If you are sure that you want to overwrite selected folder/file, then you do as below.
+    //pull the latest changes on Us_Dev from remore repo
+    -->git checkout Us_Dev
+    -->git pull
+    //pull the latest changes on master from remore repo
+    -->git checkout master
+    -->git pull
+    //merge the changes from Us_Dev to master only on  JarProject16
+    -->git checkout Us_Dev -- JarProject16
+    -->git reset HEAD JarProject16/pom.xml
+    -->git checkout -- JarProject16/pom.xml
+    -->git commit -m "'Merge' these changes from us_dev to master on jar proejct16"
+    -->git push
+
+    If you are sure that you want to merge selected folder/file, then merge do as below.
+    //pull the latest changes on Us_Dev from remore repo
+    -->git checkout Us_Dev
+    -->git pull
+    //pull the latest changes on master from remore repo
+    -->git checkout master
+    -->git pull
+    //merge the changes from Us_Dev to master only on  JarProject16
+    -->navogate to specific project JarProject16.. cd JarProject16
+    -->git merge --no-commit --allow-unrelated-histories Us_Dev
+    -->git reset HEAD JarProject16/pom.xml
+    -->git checkout -- JarProject16/pom.xml
+    -->git commit -m "'Merge' these changes from us_dev to master on jar proejct16"
+    -->git push
+© 2019 GitHub, Inc.
+-----------------------------------------------------------------------------------------------
+Day4: Practice: Please spend some time and practice github as mentioned below.
+  1. Create a repo under your username with README & .gitignore file, and then add any maven project.
+
+  2. Create a repo under your username WITHOUT README & .gitignore file, and then add any maven project.
+
+  3. Try to give access to others on the repo which you created under your username.
+
+  4. Create an organization. (Note: Org name is unique across the GitHub server).
+
+  5. Create a repo under your username with README & .gitignore file, and then add any maven project. OR transfer the repo (your repo which you recently created under username) to organization.
+
+  6. Add few people as OWNER.
+
+  7. Give read access to some group of people on the repo.
+
+  8. Give write access to some group of people on the repo.
+
+  9. Give admin access to some group of people on the repo.
+
+  10. Give write access to some group of people on the repo on particular branhc only (i.e., protect branch OR branch wise restriction).
+
+  11. Transfer the repo from one organization to another org. (create another repo and practice on it)
+
+  12. Transfer the repo from one organization to another username. (create another repo and practice on it)
+
+  13. Detele a repo (create another repo and practice on it).
+
+  14. Delete an Organization (create another org and practice on it).
+
+  15. Change the default branch from master to other branch.
+
+  16. Delete the master or anyother branch.
+
+  17. Create a forked branch on local and push to the remote repo.
+
+  18. Create an orphan branch on local and push to the remote repo.
+
+  18. See the diff between two commit ids (Syntax: git diff commitID1 commitID2)
+
+  19. Create and apply the patches (google for it if you don't get it).
+
+  20. practice the commands: https://orga.cat/posts/most-useful-git-commands , https://confluence.atlassian.com/bitbucketserver/basic-git-commands-776639767.html
+
+    20.1. git show : https://git-scm.com/docs/git-show
+    20.2. git log :  https://git-scm.com/docs/git-log
+    20.3. git branch Or git branch -l Or git branch -v Or git branch -av
+    20.4. git branch -a
+    20.5. git branch -r
+    20.6. git reset --hard origin/<branchName>   (do some local changes with AND without commit and then run this command, then see what happends)
+    20.7. git reset --mixed origin/<branchName>  (do some local changes with AND without commit and then run this command, then see what happends)
+    20.8. git reset --soft origin/<branchName>   (do some local changes with AND without commit and then run this command, then see what happends)
+    20.9. Create tag and push tags, diff between tags, rename tags:
+        20.9.1. Command to create tag: git tag -a <tagName> <commitID> -m "message here"
+        20.9.2. Command to psuh tags to remote repo.
+            20.9.2.1. git push origin <tagName>  --> to push this particular tag to remote github repo.
+            20.9.2.2. git push --tags OR git push --tags origin <branchName> --> to push all the tags of particular branch.
+        20.9.3. Differences between two tags (indirectly its difference between two commit-id): git diff <tagName1> <tagName2>
+        20.9.4. Rename the tag steps: 
+            20.9.4.1. git tag -l  --> list of tags, select a tag which one you wants to rename.
+            20.9.4.2. git tag <newTagName> <oldTagName> --> rename tag.
+            20.9.4.3. git tag -d <oldTagName> --> removing the old tag from local.
+            20.9.4.4. git push origin :refs/tags/<oldTagName> --> removing the old tag from remote server.
+            20.9.4.5. git push origin --tags --> pushing the local tags to remote server, so that the new server also pushed to remote server.
+        20.9.5. Checkout the tag: git checkout tags/<tagName>.
+
+    20.10. Create an orphan branch steps.
+        20.10.1. git checkout --orphan <newBranchName>
+        20.10.2. git rm -rf .
+        20.10.3. echo "new orphan branch" > README.md
+        20.10.4. git add README.md
+        20.10.5. git commit -a -m "adding new orphan branch"
+        20.10.6. git push or git push origin <newBranchName>
+    20.11. try this command: gitk
+    20.12. try this command: git re-parse <branchName>
+    20.13. try this command: git reflog
+    20.14. try this command: git log --abbrev-commit --pretty=online
+    20.15. try this command: git log -g <branchName>
+    20.16. try this command: git log --pretty=format: '%h %s' --graph
+    20.17. try this command: git log -4 --pretty=format: '%h %s'
+    20.18. try this command: git log branch1..branch2
+    20.19. Git clone particular branch: git clone -b <branchName> <gitURL> <destination>
+    20.20. Steps to create a new forked branch: 
+        20.20.1. git checkout -b <newBranch> : this will create a new branch with the source code of current branch.
+        20.20.2. git push origin <newBranch> : pushing the new branch to remote github.
+    20.21. Steps to rename the branch:
+        20.21.1. git branch -m <new_branch_name> : if you wants to rename the currect checkout branch.
+             git branch -m <old_branch_name> <new_branch_name> : if you wants to rename the other branch than the currect checkout branch.
+        20.21.2. git push origin :<old_branch_name> <new_branch_name> : remove the old one and push the new to remove.
+    20.22. to see the remote GitHub repo URL: git remote -v   OR git remote show origin
+    20.23. Steps to revert: Explanation with a scenario.
+        20.23.1. There are few commits C1, C2, C3, C4, C5 on a repo/project (on a particular branch).
+        20.23.2. Now, we wanted to revert our changes to C3 commit-id. i.e., make the C3 changes as latest code in a branch. Commit C4 created because of some changes made on the C3 commit code.
+        20.23.3. To do this, we need to revert the commit-id C4. (the changes made between C3 & C4 needs to be reverted).
+             Command is: git revert C4 (ex: git revert <commit-id>). Its trying to reverting the changes made between C3 & C4. 
+        20.23.4. Resolve the conflicts if any. (if there are any conflicts in any file(s), we have to resolve them and then run the command "git add <fileName>" OR "git add .").
+        20.23.5. commit the local changes: git commit -m "Reverting the changes to C3 commit-id".
+        20.23.6. push the local changes to remote: git push or git push origin <branchName>.
+  21. Prepare a document with best practice on GitHub for Dev or other teams.
+        For example,
+        Assume, there is a commit revision like C1, C2 & C3 on your branch. Here C3 is the latest commit-id on your both local & remote branches.
+        You & your team member started working at same time. You made some changes on your local and then committed LC4 (not yet pushed).
+        Your team member made come changes locally and then committed and then pushed his local commit and then commit-id created as RC4. (remote commit 4).
+        Now, if you look at your workspace, your local code is not the latest code. Because there is another remote commit-id Rc4 on the server.
+        Now again, you are trying to push your local commit-id LC4 to remote, but its failing and showing some error message non-fast-forward (there is an option to force push but this force push disabled in real time, so force push is not recommended. But do force push and see what happens).
+        If you want to push your local commits, first you needs to update local workspace make sure its sync with remote. "git pull origin branchName" to update your local workspace with remote changes.
+        This time, the RC4 is trying to merge with your LC4 and then git created another commit-id MC5 (merge commit-id 5).
+        Finally, "git push origin branchName" will works fine.
+
+        Here you have to observe, why git is creating a merge commit-id?
+            a. if you forgot to "pull" before you commit, a commit-id created locally with your changes.
+            b. after that, When try push, its failing.
+            c. If you try to "pull" now, the latest commit-id from remote will be merged with your local commit-id and then git creates a merge commit-id.
+            d. You may face some conflicts when remote commit-id merged with your local commit-id (conflicts occured when only the changes made in same file, same line by other member too).
+            e. To avoid merge commits, you better to pull before you commit your changes.
+
+        What is the best solution/practice to avoid merge commits?
+
+        21.1. Every time, please "pull" before you start working on your local workspace. i.e., before you made any chnages.
+        21.2. Made your changes (but dont commit now).
+        21.3. Please "pull" again once you are ready to commit.
+        21.4. Resolve if any conflicts. (conflicts occured when only the changes made in same file, same line by other member too).
+        21.5. "push" now.
+
+        So, this is the best practice on GitHub for Dev or other teams. Please share me if you have any other ideas.
+
+  22. GIT MERGE: I will share it to you soon.
+        Case-1: Branch to branch merge (without skip any project or file).
+        Case-2: Branch to branch merge (with skipping some of the projects/files).
+
+  23. Git rebase: Rebase is to synch the brnaches in development & release cycle.
+
+    Assume there are commints C1, C2, C3, C6 in master branch, and C4, C5 in feature branch.
+
+    git checkout master
+    git log --oneline (only the master branch commits you will see i.e., C1, C2, C3, C6)
+    git checkout feature
+    git log --oneline (only the feature branch commits you will see i.e., C1, C2, C3, C4, C5)
+    git rebase master
+    git log --oneline (all C1, to C6 commits will be added to feature branch)
+    git checkout maser
+    git merge feature (C1, to C6 all commits will be merged to master branch)
+    now, both the branches are in synch.
+
+
+  24. Git Clone to STS/Eclipse, and then commit, pull, switch, add new proj, push: I will share it to you soon.
+
+  25. Synchronize workspace on STS/Eclipse: I will share it to you soon.
+
+  26. Git reset vs revert vs rebase: I will share it to you soon.
+
+  27. Save the credes in windows: git config --global credential.helper wincred
+
+  === Preapre a document if you find something new and share with all our DevOps team members. ===
+  =================================================================================================
+  
+  Git or GitHub interview questions
+1. What is Git & GitHub?
+2. Differences between SVN and GitHub? Differences between CVCS & DVCS?
+3. Branching strategy?
+4. Command to create/delete/rename a tag?
+5. Command to create/delete/rename a branch?
+6. Once git push is done, how to configure a Jenkins job as to run automatically.
+8. Diff between reset, revert, rebasae.
+9. Diff between soft, mixed, hard in reset. Default reset is mixed.
+10. Create a new branch/tag from particular commit-id?
+11. Rename the tag?
+12. Rename the branch?
+13. How to edit commit messages?
+14. gitk command (to check commit log).
+15. Git merge & Resolve merge conflicts. Command is "git add .".
+16. Git unstaged & staged areas?
+17. Move a repository from one organization to another organization.
+18. How to create an orphan branch.
+19. How/why to fork?
+20. What is pull request?
+21. How to protect a branch?
+22. Commit hooks?
+23. How to switch from one branch to another branch?
+=====================================================================
+Day1: Concepts
+How to access the code. Restictions on the code : Read, Write, Admin, Owner. : Just theoritical explanation.
+
+Operations on code (check-out, check-in) : clone, add, commit, pull, push, fetch, revert, reset, rebase etc : Just theoritical explanation.
+
+Practical Explanation:
+
+From Github End:
+	2.1. Creating a repo under username.
+	2.2. By default repo created with a branch called "master".
+	2.3. auto genarted files .gitignore & README.md.
+From User end:
+	2.4. Install GitScm & TortoiseGit. : https://git-scm.com/downloads , TortoiseGit: https://tortoisegit.org/download/
+	2.5. Use github commands to upload the code. (Git) : Git 
+		5.1. Clone the repo. Command: git clone <GitHubRepoURL> <destinationPath>.
+		5.2. git add .
+		5.3. git commit -m "Uploading a maven project for SampleJar".
+		5.4. git push.
+		5.5. Commit histroy.
+		5.6. git pull
+	2.6. Upload the code with the help of ToirtoiseGit.
+	2.7. STS/Eclipse/Rad Setup.
+Manage the code (branching, merging, taging): Organization, Repository : Just theoritical explanation.
+Day2: Concepts
+Day1: Pending concepts: 2.6, 2.7.
+
+Multiple Branches.
+
+GitHub Repo/Project name : InternetBanking
+
+Branching Strategy-1: master: latest production code
+
+ Sprint-1: AUG-R2-MAJOR-2018
+ 	B1 : current dev branch
+
+ Sprint-2: 
+ 	B1 : 21-01-2018 : Prod code: lock the branch just before 5 to 10 days of implementation date : Merge B1 code to master branch after implementation day(22-01-2018). : And then create a new branch B2 from B1 (or) master branch (or) a particular tag/release since both have samme code.
+ 	B2 : current dev branch.
+
+ Sprint-3:
+ 	B1 : Remove.
+ 	B2 : Prod code: lock the branch just before 5 to 10 days of implementation date : Merge B2 code to master branch after implementation. : And then create a new branch B3 from B2 (or) master branch (or) a particular tag since both have samme code.
+ 	B3 : current dev branch
+Branching Strategy-2: UK_Master : latest production code HK_Master : latest production code IN_Master : latest production code Sprint-1: Branch-1: Branch-name: UK_R1 Branch-2: Branch-name: HK_R1 Branch-3: Branch-name: IN_R1 Sprint-2: Branch-1: Branch-name: UK_R2 Branch-2: Branch-name: HK_R2 Branch-3: Branch-name: IN_R2
+
+Pull & push for each branch. : git pull Vs git pull origin AND git push Vs git push origin
+
+Switch from one branch to other branch. : git checkout
+
+Organization & Repos under Organization.
+
+ORG1: Prodcution : DIGITALAPPLICATION ORG2: TESTING proj. : DIGITALAPPLICATION-SELENIUM ORG2: SANDBOX : only Build ORG4: TOOLS
+
+Teams.
+
+Protect Branch, i.e., branch wise restiction.
+
+Day3: Concepts
+Day2: Pending concepts: 6, 7.
+
+Create teams.
+
+Protect branches. i.e., branch wise protection.
+
+Create branch from command line. git checkout -b , git push origin newbranchName.
+
+Transfer a git repo from one organisation to another username or Organization.
+
+Rename the existing github branch.
+
+Create an orphan branch. (Before that show what is forked branch).
+
+Other github basic commands:
+
+7.1. differences between two commit-ids: git diff
+
+7.2. git diff > diff.patch : creating path file with the changes between two commits.
+
+7.3. list of branches: git branch, git branch -a, git branch -r.
+
+7.4. git log
+
+Try to practice the same on https://bitbucket.org/ AND https://gitlab.com/ (since all are similar but minor differences are there). So that at time, you will get some idea on all 3 tools GitHub, BitBucket, GitLab. Google to know the differences between the tools.
