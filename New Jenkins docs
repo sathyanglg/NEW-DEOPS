@@ -1,0 +1,609 @@
+Jenkins Setup
+  1. Go to Phase-1 docs & setup Jenkins.
+  2. Practice the simple example which is covered in Phase-1.
+  3. Setup a job in Jenkins as to: Code checkout --> Build(compile-->test-->package-->deploy to Nexus) --> deploy to tomcat. (as guided in Phase-1 docs)
+  4. Schedule the job to run everyday morning 6am & evening 6pm. (Build Periodical)
+  5. Schedule the job to run for every check-in. (GitHub Push)
+  6. Install the plugin "Nested view plugin" (Manage Jenkins --> Manage Plugins --> Available --> search for this and install).
+  7. Setup a pipeline: Job1 --> Job2 --> Job3.
+   
+What you learned
+  1. Installation of Jenkins.
+  2. Jenkins job configuration with Git URL to checkout the code.
+  3. Jenkins job configuration with maven goals to build the code.
+  4. Jenkins job configuration to deploy the package to Tomcat.
+  5. settings.xml file configuration with Nexus server credentials.
+  6. pom.xml file configuration with Nexus repositories details.
+  7. Deploy the Package to Nexus.
+  8. Downstream & Upstream job setup i.e., pipeline jobs setups.
+  9. Installation of plugin in two ways.
+  
+  enkins - Day1 - topics need to be covered
+
+    1. What is Jenkins & CI-CD defined by Atlassian?
+
+    2. Jenkins setup? & Describe the home page.
+    
+    3. Manage Jenkins --> Manage plugins. (Install 'maven integration' plugin to find the new job template).
+            3.1. Job Configuration History plugin.
+            3.2. Read-only configurations.
+            3.3. Build Pipeline (view).
+            3.4. Parameterized Trigger Plugin.
+            3.5. Template Project plugin.
+            3.6. Run Condition Plugin.
+            3.7. EnvInject Plugin.
+            3.8. Configuration Slicing.
+            3.9. Rebuilder plugin.
+            3.10. Backup plugin.
+            3.11. Sonar plugin.
+            3.12. Checkstyle plugin.
+            3.13. JaCoCo plugin.
+            3.14. Next Build Number plugin.
+            3.15. Groovy Postbuild plugin.
+            3.16. MSBuild plugin.
+            3.17. NAnt plugin.
+            3.18. Team Concert (for RTC).
+            3.19. Build Monitor plugin.
+            3.20. JIRA plugin.
+            3.21. Blue Ocean plugin.
+            3.22. Mask Passwords.
+            3.23. Maven Integration.
+            3.24. Maven Release Plug-in.
+            3.25. Parameterized Remote Trigger Plugin.
+            3.26. Credentials Plugin.
+            3.27. Nested view plugin (view).
+            3.28. Pipeline.
+            3.29. Workspace Cleanup Plugin.
+            3.30. SSH Slaves plugin.
+    
+    4. Create a freestyle job & echo message & build periodical.
+    
+    5. Setup Upstream & downstream jobs. 
+    
+    6. Jenkins folders & views (Nested view, build piepline view, Build monitor view etc).
+
+    7. How to practice the covered topics in Day-1.
+    
+    7. Interview questions?
+    
+            What is CI & CD?
+            What is upstream & downstream?
+            How to configure the upstream & downstream jobs?
+            What is downstream & upstream job?
+            What is piepline in downstream & upstream job (show an example with 'build pipeline' plugin) ?
+            How to install/uninstall/upgrade a plugin?
+            Number of ways to install the plugin?
+            What is *.hpi & hpi stands for?
+            Difference between freestyle & maven projects/jobs?
+          enkins - Day2 - topics need to be covered
+
+    1. Manage Jenkins --> Manage plugins (Different types of backup plugins). Uninstall dependenct plugins.
+    
+    2. Manage Jenkins --> Configure System.
+    
+    3. Manage Jenkins --> Configure Global Security.
+    
+    5. Manage Jenkins --> Configure Credentials.
+    
+    6. Manage Jenkins --> Global Tool Configuration.
+    
+    7. Manage Jenkins --> Manage Nodes.
+
+    8. Manage Jenkins -->
+    
+            8.1. Reload Configuration from Disk.
+            8.2. System Information.
+            8.3. System Log.
+            8.4. Jenkins CLI.
+            8.5. Script Console: ex: List the Jenkins jobs: Jenkins.instance.items*.fullName.join('\n').
+            8.6. About Jenkins.
+            8.7. Manage Users.
+           
+     9. Jenkins commands --> restart, safeRestart, build etc
+    
+     10. Interview questions?
+    
+            What is difference between restart, safeRestart.
+            How to configure credentials?
+            How to add user?
+            How to restrict a user to only read/build/configure ect jobs?
+            Different types of permissions?
+            Jobs wise persmission?
+            How to setup the Java, maven, git etc paths in jenkins?                    
+            
+            https://github.com/jenkinsci/job-dsl-plugin/wiki/Tutorial---Using-the-Jenkins-Job-DSL  
+            ---------------------------------------------------------------------------------------
+            Day3-Practice : Groovy Script
+List all the Jenkins jobs
+      Jenkins.instance.getAllItems(AbstractProject.class).each {it ->
+        println it.fullName;
+      }
+
+      Or
+
+      Jenkins.instance.items*.fullName.join('\n')
+List all the Jenkins jobs based on the regular expression
+      import jenkins.model.*
+
+      def matchedJobs = Jenkins.instance.items.findAll { job ->
+          job.name =~ /New/
+      }
+
+      matchedJobs.each { job ->
+          println job.name
+          //job.delete()
+      }
+Create a new job in Jenkins
+      import jenkins.model.Jenkins;
+      import hudson.model.FreeStyleProject;
+      import hudson.tasks.Shell;
+
+      job = Jenkins.instance.createProject(FreeStyleProject, 'job-name')
+
+      job.buildersList.add(new Shell('echo hello world'))
+
+      job.save()
+Create a new job by copying the existing job in Jenkins
+      def template = hudson.model.Hudson.instance.getItem('job-name')
+
+      job = hudson.model.Hudson.instance.copy(template, 'New-Project')
+
+      job.setDescription("This job created from the exisitng job job-name")
+
+      job.save()
+Update the Job description of exisitng job
+      def job = hudson.model.Hudson.instance.getItem('job-name')
+
+      job.setDescription("updating the job description using groovy script")
+
+      job.save()
+List all the Jenkins jobs based on the regular expression & delete
+      import jenkins.model.*
+
+      def matchedJobs = Jenkins.instance.items.findAll { job ->
+          job.name =~ /New/
+      }
+
+      matchedJobs.each { job ->
+          println job.name
+          job.delete()
+      }
+List all the DISABLED Jenkins jobs
+      import jenkins.model.*
+
+      def matchedJobs = Jenkins.instance.items.findAll { job ->
+          job.name =~ /New/
+      }
+
+      matchedJobs.each { job ->
+
+          if(job.disabled){
+            println("Diabled job"+job.name)
+        }
+
+      }
+List all the DISABLED Jenkins jobs & delete
+      import jenkins.model.*
+
+      def matchedJobs = Jenkins.instance.items.findAll { job ->
+          job.name =~ /New/
+      }
+
+      matchedJobs.each { job ->
+          println job.name
+          job.delete()
+      }
+List all the DISABLED Jenkins jobs & delete & print the enabled jobs
+      import jenkins.model.*
+
+      def matchedJobs = Jenkins.instance.items.findAll { job ->
+          job.name =~ /New/
+      }
+
+      matchedJobs.each { job ->
+          //println job.name
+
+        if(job.disabled){
+            println("Diabled job"+job.name)
+            job.delete()
+          }else println "Enabled jobs: "+job.name
+      }
+Create a jenkins job along with GitURL
+      import hudson.tasks.Shell
+
+      def repository = 'https://github.com/DayToDayDevOpsCourse/MavenDayToDayCourse.git' 
+
+      job = Jenkins.instance.createProject(FreeStyleProject, 'TestJob')
+
+      job.setDescription("Some description") 
+
+      job.scm = new hudson.plugins.git.GitSCM(repository) 
+
+      job.save()
+Create a jenkins job along with GitURL & branch
+      import hudson.tasks.Shell
+
+      def repository = 'https://github.com/DayToDayDevOpsCourse/MavenDayToDayCourse.git' 
+
+      job = Jenkins.instance.createProject(FreeStyleProject, 'TestJob')
+
+      job.setDescription("Some description") 
+
+      job.scm = new hudson.plugins.git.GitSCM(repository) 
+
+      def gitScm = job.scm
+
+      gitScm.branches = [new hudson.plugins.git.BranchSpec('master')]
+
+      job.save()
+Add the credentials to Jenkins
+      import jenkins.model.*
+      import com.cloudbees.plugins.credentials.*
+      import com.cloudbees.plugins.credentials.common.*
+      import com.cloudbees.plugins.credentials.domains.*
+      import com.cloudbees.plugins.credentials.impl.*
+      import com.cloudbees.jenkins.plugins.sshcredentials.impl.*
+      import hudson.plugins.sshslaves.*;
+
+      domain = Domain.global()
+      store = Jenkins.instance.getExtensionList('com.cloudbees.plugins.credentials.SystemCredentialsProvider')[0].getStore()
+
+
+
+      usernameAndPassword = new UsernamePasswordCredentialsImpl(
+        CredentialsScope.GLOBAL,
+        "JenkinsGitHub", "JenkinsGitHub",
+        "venkatasykam",
+        "Forgot#1987"
+      )
+
+      store.addCredentials(domain, usernameAndPassword)
+      ============================================================
+      Day3-Practice-2
+Checkout the code:
+    node {
+       stage('Checkout') {
+          //Checkout the code from a GitHub repository
+          git credentialsId: 'jenkinsGitHub', url: 'https://github.com/DIGITALAPPLICATION/WebApp.git'
+          }
+    }
+Checkout the code + Build:
+    node{
+      stage('Checkout'){
+        //Checkout the code from a GitHub repository
+        git credentialsId: 'jenkinsGitHub', url: 'https://github.com/DIGITALAPPLICATION/WebApp.git'
+      }
+      stage('build'){
+        sh '"/root/apache-maven-3.5.3/bin/mvn" -V clean verify'
+      }
+    }
+Checkout the code + build + test +deploy to nexus: four stages
+    node{
+      stage('Checkout'){
+        //Checkout the code from a GitHub repository
+        git credentialsId: 'jenkinsGitHub', url: 'https://github.com/DIGITALAPPLICATION/WebApp.git'
+      }
+      stage('build'){
+        sh '"/root/apache-maven-3.5.3/bin/mvn" -V clean compile'
+      }
+      stage('test'){
+        sh '"/root/apache-maven-3.5.3/bin/mvn" -V clean test'
+      }
+                   stage('deploy-to-nexus'){
+        sh '"/root/apache-maven-3.5.3/bin/mvn" -V clean deploy'
+      }
+    }
+Checkout the code + build + test +deploy to nexus + deploy to tomcat server: 5 stages
+    node{
+      stage('Checkout'){
+        //Checkout the code from a GitHub repository
+        git credentialsId: 'jenkinsGitHub', url: 'https://github.com/DIGITALAPPLICATION/WebApp.git'
+      }
+      stage('build'){
+        sh '"/root/apache-maven-3.5.3/bin/mvn" -V clean compile'
+      }
+      stage('test'){
+        sh '"/root/apache-maven-3.5.3/bin/mvn" -V clean test'
+      }
+      stage('deploy-to-nexus'){
+        sh '"/root/apache-maven-3.5.3/bin/mvn" -V clean deploy'
+      }
+      stage('deploy-to-tomcat'){
+        sh '''
+        echo Deploy the war to tomcat server.
+
+        echo Step-1: Removing the existing package
+        rm -rf /root/tomcat7/webapps/WebApp-*.war
+        rm -rf /root/tomcat7/webapps/WebApp-*
+
+        echo Step-2: Staging the new package to tomcat server.
+        cp ${env.WORKSPACE}/target/*.war /root/tomcat7/webapps
+        '''
+      }
+    }
+Remove unnecessary phases compile, test since these two goals are covered in deploy phase by default.
+    Checkout the code + build(compile+test+deploy the package to nexus) + deploy to tomcat: five stages
+
+    node{
+      stage('Checkout'){
+        //Checkout the code from a GitHub repository
+        git credentialsId: 'jenkinsGitHub', url: 'https://github.com/DIGITALAPPLICATION/WebApp.git'
+      }
+      stage(' build(compile+test+deploy the package to nexus) '){
+        sh '"/root/apache-maven-3.5.3/bin/mvn" -V clean deploy'
+      }
+      stage('deploy-to-tomcat'){
+        sh '''
+        echo Deploy the war to tomcat server.
+
+        echo Step-1: Removing the existing package
+        rm -rf /root/tomcat7/webapps/WebApp-*.war
+        rm -rf /root/tomcat7/webapps/WebApp-*
+
+        echo Step-2: Staging the new package to tomcat server.
+        cp ${WORKSPACE}/target/*.war /root/tomcat7/webapps
+        '''
+      }
+    }
+============================================================================================
+Maven - Day3 - topics need to be covered
+
+    1. Different types of Jenkins job templates.
+    
+            1.1. Freestyle project.
+            1.2. Maven project.
+            1.3. Pipeline.
+            1.4. Multibranch pipeline.
+    
+    2. Important feature of Jenkins job configuration.
+            
+            General Section:
+
+                    2.1. This project is parameterized
+                    2.2. Discard old builds.
+                    2.3. Disable this project.
+                    2.4. Use custom workspace.
+                    2.5. Restrict where this jib can run. (slave selection).
+                    2.6. Execute concurrent builds if necessary (JDK selection).
+                    
+            Source Code Management:
+            
+                    2.7. Git. (Repository URL, Credentials, Branch Specifier, Checkout to a sub-directpry, Checkout to specific local branch).
+                    2.8. Subversion. 
+                    2.9. Rational Team Concert (RTC).
+            
+             Build Triggers:
+             
+                    2.10. Build after other projects are built (for upstream job configuration).
+                    2.11. Build periodically.
+                    2.12. Poll SCM.
+                    2.13. GitHub hook trigger for GITScm polling.
+                    
+             Build Environment:
+                    
+                    2.14. Delete workspace before build starts.
+                    2.15. Mask passwords.
+                    2.16. Maven release build (maven release plugin, its visible only for maven project).
+             
+             Pre-Steps: (maven project) Options are same as below "Build: for free style project".
+             
+             Build: for free style project.
+                    2.16. Execute Groovy script.
+                    2.17. Execute Windows batch command.
+                    2.18. Execute shell.
+                    2.19. Invoke Ant.
+                    2.20. Invoke Gradle script.
+                    2.21. Invoke top-level maven targets.
+                    2.22. Use builders from another project.
+               
+              Build: for maven project.
+                    
+                    2.23. Maven Version.
+                    2.24. Root POM.
+                    2.25. Goals and options.
+                    2.26. MAVEN_OPTS (Advanced..)
+                    2.27. Use private Maven repository (Advanced..)
+                    2.28. Use custom workspace - Settings, Global Settings files paths (Advanced..)                        
+              
+              Post-Steps: (maven project) Options are same as above section "Pre-Steps". Addition optiols are..
+                    
+                    2.29. Run only if build succeeds.
+                    2.30. Run only if build succeeds or is unstable.
+                    2.31. Run regardless of build result.
+                
+              Build Settings: (Maven Project)
+                    
+                    2.32. Email Nitification.
+                    
+              Post-build Actions: (for both maven & freestyle)
+                    
+                    2.33. Email Nitification. (only for freestyle)
+                    2.34. Ediatble Email Notification.
+                    2.35. Build other projects.
+                    2.36. Groovy Postbuild.
+                    2.37. Public HTML reports.
+                    2.38. Record JaCoCo coverage report.
+                    2.39. Delete workspace when build is done.
+                    2.40. Public Junit test result report. (free style).
+                    2.41. Trigger Parameterized builds on other projects.
+                    2.42. SonarQube analysis with Maven.
+            
+    
+    3. Jenkins + Maven + GitHub + Nexus examples.
+    
+            3.1. Freestyle job as to build & deploy the artifacts to nexus & tomcat.
+            3.2. Maven job as to build & deploy & release the artifacts to nexus & deploy the same package to tomcat (as per Phase-1 concept).
+            3.3. The same above scenario with pipeline script.
+            3.4. Same above scenario with Blue ocean plugin.
+            3.5. Maven release with manual steps. (without a maven release plugin & drawbacks and plus points with this).
+
+    4. Interview Questions:
+       
+       How to create a job in Jenkins? ((Click on NewItem--> explain all the configuration details)
+       How to setup a CI job?
+       How to setup a CD job?
+       What is difference between Continuous Delivery & Continuous Deployment?
+       Maven release steps?
+       release:prepare & release:perfrom?
+       What/why are <scm> tags in pom.xml?
+       What is <distributedManagement> section in pom.xml file?
+       Difference b/w SNAPSHOT & RELEASE versions?
+       Freestyle job vs Maven job?
+       Blue ocean vs pipleine script?
+       What is multibranch pipleine & how to configure it?
+     =============================================================================================================
+     Jenkins Interview Questions.
+What is Jenkins?
+What are the job templates you are using? How to create a new iteam/job?
+What is the difference between Maven and free-style job templates?
+Where to configure the code repo details? (under SCM section).
+Difference between Build Periodical & Poll SCM, define each?
+How to configure Sonar in Jenkins job?
+Email notification? (Tow types, 1. email notification & Editable Email notification to send attachments too).
+What is the fix for OutOfMemory issue. (increasase HEAP size, need to add it to maven Options).
+Environment varibales?
+How to install a plugin? (two ways)
+Different way of providing access to users? Matrix/Project based security. Which one you are using?
+How to add a user & provide permissions.
+What is minimum required to install Jjenkins? (Java should be installed).
+Different types of Build errors/issues you faced in your work environemnt? (3 types. 1-->Network or anyother issues which whould be fixed by ALM/LTS/Support teams, 2-->Some errors which whould be fixed by Build Team, for example, wrong job congiguration, 3-->Some other errors which whould be fixed by Dev Team, for example, Compilation errros, test case failures etc.)
+What are the different types of job templtes you used. Maven, free-style, pipeline etc.
+Up-Stream, Down-Stream jobs (pipeline setup)?
+What is Parameterized job? How to pass the parameters from one job to anotehr job?
+Pipeline script for CI/CD?
+What are the automations you have done? Using groovy script create/rename/delete/disable the Jenkins jobs?
+How to take backup? (backup plugin)
+What is Jenkins noide/slave?
+How to creare & configure slave/node in jenkins?
+What arte the plugin you installed?
+How to copy the artifacts from one job to another job?
+How to add Java/Maven/Git paths in jenkins? (Global Tool Configuration).
+What is "Manage Plugins"?
+==============================
+Jenkins Pipeline Script
+Scenario-1: 
+1.1.	Checkout the code from GitHub using Jenkins pipeline script.
+Checkout the code: single stage
+node {
+   stage('Checkout') {
+      //Checkout the code from a GitHub repository
+      git credentialsId: 'jenkinsGitHub', url: 'https://github.com/DIGITALAPPLICATION/WebApp.git'
+      }
+}
+
+Scenario-2: 
+2.1. Checkout the code from GitHub.
+2.2. Compile the source code and then package the compiled files.
+Checkout the code + build: two stages
+node{
+	stage('Checkout'){
+		//Checkout the code from a GitHub repository
+		git credentialsId: 'jenkinsGitHub', url: 'https://github.com/DIGITALAPPLICATION/WebApp.git'
+	}
+	stage('build'){
+		sh '"/root/apache-maven-3.5.3/bin/mvn" -V clean package'
+	}
+}
+
+Output:
+ 
+Scenario-3: 
+3.1. Checkout the code from GitHub.
+3.2. Compile the original source code.
+3.3. Compile the test source files and run those tests. (Original source code also will be compiled in this stage; sometimes we may get this type of Jenkins job configuration request from Dev team).
+3.4. Package the compiled code and then deploy/stage the package to nexus. (In this phase 3.3 included, please refer maven lifecycle phases. If dev team don’t request separate stages, then 3.1 & 3.4 stages are enough).
+
+Checkout the code + build + test +deploy to nexus: four stages
+node{
+	stage('Checkout'){
+		//Checkout the code from a GitHub repository
+		git credentialsId: 'jenkinsGitHub', url: 'https://github.com/DIGITALAPPLICATION/WebApp.git'
+	}
+	stage('build'){
+		sh '"/root/apache-maven-3.5.3/bin/mvn" -V clean compile'
+	}
+               stage('test'){
+		sh '"/root/apache-maven-3.5.3/bin/mvn" -V clean test'
+	}
+               stage('deploy-to-nexus'){
+		sh '"/root/apache-maven-3.5.3/bin/mvn" -V clean deploy'
+	}
+}
+
+Output:
+4 stages executed successfully.
+
+ 
+
+Deployed the package to nexus server.
+ 
+Scenario-4: 3.4. + deploy the same package to nexus.
+Checkout the code + build + test +deploy to nexus + deploy to tomcat: five stages
+node{
+	stage('Checkout'){
+		//Checkout the code from a GitHub repository
+		git credentialsId: 'jenkinsGitHub', url: 'https://github.com/DIGITALAPPLICATION/WebApp.git'
+	}
+	stage('build'){
+		sh '"/root/apache-maven-3.5.3/bin/mvn" -V clean compile'
+	}
+	stage('test'){
+		sh '"/root/apache-maven-3.5.3/bin/mvn" -V clean test'
+	}
+	stage('deploy-to-nexus'){
+		sh '"/root/apache-maven-3.5.3/bin/mvn" -V clean deploy'
+	}
+	stage('deploy-to-tomcat'){
+		sh '''
+		echo Deploy the war to tomcat server.
+
+		echo Step-1: Removing the existing package
+		rm -rf /root/tomcat7/webapps/WebApp-*.war
+		rm -rf /root/tomcat7/webapps/WebApp-*
+
+		echo Step-2: Staging the new package to tomcat server.
+		cp ${WORKSPACE}/target/*.war /root/tomcat7/webapps
+		'''
+	}
+}
+
+All 5 stages executed successfully.
+ 
+
+Copy the war package to tomcat server.
+
+ 
+Output: Run the web application which is deployed on tomcat. Run the tomcat sever http://<ipaddress>:8080. Click on “manager webapp” to find the deployed artifacts/packages in this tomcat server.
+ 
+
+Click on the context root (our application name). It will display the default web page(see below image).
+
+ 
+
+ 
+Remove unnecessary phases compile, test since these two goals are covered in deploy phase by default.
+Checkout the code + build(compile+test+deploy the package to nexus) + deploy to tomcat: five stages
+node{
+	stage('Checkout'){
+		//Checkout the code from a GitHub repository
+		git credentialsId: 'jenkinsGitHub', url: 'https://github.com/DIGITALAPPLICATION/WebApp.git'
+	}
+	stage(' build(compile+test+deploy the package to nexus) '){
+		sh '"/root/apache-maven-3.5.3/bin/mvn" -V clean deploy'
+	}
+	stage('deploy-to-tomcat'){
+		sh '''
+		echo Deploy the war to tomcat server.
+
+		echo Step-1: Removing the existing package
+		rm -rf /root/tomcat7/webapps/WebApp-*.war
+		rm -rf /root/tomcat7/webapps/WebApp-*
+
+		echo Step-2: Staging the new package to tomcat server.
+		cp ${WORKSPACE}/target/*.war /root/tomcat7/webapps
+		'''
+	}
+}
+
+ 
+
